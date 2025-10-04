@@ -1,0 +1,28 @@
+package farmersmarket;
+
+public class ReturnRequest {
+    private OrderItem item;
+    private int quantity;
+    private boolean approved;
+
+    public ReturnRequest(OrderItem item, int quantity) {
+        this.item = item;
+        this.quantity = quantity;
+    }
+
+    public boolean processReturn() {
+        if (quantity <= item.getQuantity()) {
+            item.getProduct().increaseStock(quantity);
+            approved = true;
+        } else {
+            approved = false;
+        }
+		return approved;
+    }
+
+    @Override
+    public String toString() {
+        return "Return Request for " + quantity + " of " + item.getProduct().getName() +
+               " | Approved: " + approved;
+    }
+}
